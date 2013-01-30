@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel="stylesheet" type="text/css" href="mystyle.css">
+		<script>
+     function isNumberKey(evt)
+      {
+         var charCode = (evt.which) ? evt.which : event.keyCode
+         if (charCode > 31 && (charCode < 46 || charCode > 57))
+            return false;
+         return true;
+      }
+			function blank() 
+			{ 
+				tb1.value="";
+				tb2.value="";
+			}
+			function reply_click(clicked)
+			{
+				var which = clicked;
+				instructs = document.getElementById("instructions").style.visibility;
+				
+				switch (which)
+				{
+				case "button1":
+					if (document.getElementById("instructions").style.visibility == "visible")
+						document.getElementById("instructions").style.visibility = "hidden"
+					else
+						document.getElementById("instructions").style.visibility = "visible";
+					document.getElementById("about").style.visibility = "hidden";
+					break;
+				case "button2":
+					if (document.getElementById("about").style.visibility == "visible")
+						document.getElementById("about").style.visibility = "hidden"
+					else
+						document.getElementById("about").style.visibility = "visible";
+					document.getElementById("instructions").style.visibility = "hidden";
+					break;
+				}
+			}
+			function mpgTokpg()
+			{
+				src = document.getElementById("tb1");
+				dest = document.getElementById("tb2");
+				dest.value = (1.609 * parseFloat(src.value))/3.785;
+				if(tb1.value == "" || tb1.value == ".")
+				{
+					tb2.value = ""
+				}
+			}
+			function kpgTompg()
+			{
+				src = document.getElementById("tb2");
+				dest = document.getElementById("tb1");
+				dest.value =(parseFloat(src.value)/1.609) * 3.785;
+				if(tb2.value == "" || tb1.value == ".")
+				{
+					tb1.value = ""
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<img id = "bar" src="bar.png" alt="leftbar"/>
+		<img id = "bar2" src="bar.png" alt="rightbar"/>
+		<img id = "sign1" src="sign.png" alt="leftsign"/>
+		<img id = "sign2" src="sign2.png" alt="rightsign"/>
+		<img id = "titlebar" src="titlebar.png" alt="title" />
+		<img id = "about" src="about.png" alt="about"/>
+		<img id = "instructions" src="instructions.png" alt="instructions"/>
+		<button id="button1" onClick="reply_click(this.id)">Help</button>
+		<button id="button2" onClick="reply_click(this.id)">About</button>
+		<input type='text' maxlength="4" id="tb1" onfocus="blank()" onkeypress="return isNumberKey(event)" onkeyup="mpgTokpg()"/>
+		<input type='text' maxlength="4" id="tb2" onfocus="blank()" onkeypress="return isNumberKey(event)" onkeyup="kpgTompg()"/>
+	</body>
+</html> 
+
